@@ -24,7 +24,7 @@ final class ProductViewModel: BaseViewModel {
     private var cartResponse = Products(products: []) {
         didSet {
             viewState = .loading
-            coreDataProvider.clearData()
+            CoreDataStack().clearData()
             createCartItemsArray(from: cartResponse)
         }
     }
@@ -42,6 +42,7 @@ final class ProductViewModel: BaseViewModel {
 
 extension ProductViewModel {
     func downloadCartItems() {
+        
         guard isReachable else { return viewState = .badConnection }
         
         viewState = .loading
@@ -60,16 +61,6 @@ extension ProductViewModel {
     }
     
     func navigateToCartItemViewController(for indexPath: IndexPath, from viewController: UIViewController, completion: (() -> Void)? = nil) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "ProductDetails")
-        do {
-          product = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }
         let storyboard = UIStoryboard(name: Constants.Controllers.ProductItemViewController, bundle: nil)
         if let controller = storyboard.instantiateViewController(withIdentifier: Constants.Controllers.ProductItemViewController) as? ProductItemViewController {
             readData()
@@ -87,6 +78,7 @@ extension ProductViewModel {
     private func createCartItemsArray(from cart: Products) {
         let coreDataProvider = CoreDataStack()
         cartItems = []
+        
         cart.products.forEach {
             let responseItem = $0
             guard isReachable else { return viewState = .badConnection }
@@ -100,6 +92,7 @@ extension ProductViewModel {
                 if let error = error {
                     self?.viewState = .error(error)
                 }
+                
                 coreDataProvider.saveProduct(name: responseItem.name, image: image, id: String(responseItem.id), price: String(responseItem.price))
                 self?.cartItems.append(Item(id: responseItem.id,
                                                name: responseItem.name,
@@ -124,7 +117,7 @@ extension ProductViewModel{
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        for i in 0...product.count - 1 {
+        for i in 0..<product.count {
             let price: String =  product[i].value(forKey: "price") as! String
             let inP = Int(price)
             let id = product[i].value(forKey: "id") as! String

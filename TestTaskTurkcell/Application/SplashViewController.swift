@@ -17,7 +17,6 @@ final class SplashViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         createNetworkingRequests()
     }
     
@@ -28,7 +27,6 @@ private extension SplashViewController{
     
     private func createNetworkingRequests() {
         loadingActivityIndicator.startAnimating()
-        
         let cartViewModel = ProductViewModel()
         cartViewModel.downloadCartItems()
 

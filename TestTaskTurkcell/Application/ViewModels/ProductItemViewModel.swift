@@ -22,6 +22,7 @@ final class ProductItemViewModel: BaseViewModel {
     // MARK: - Properties
     private var itemResponse: DetailedProductItemResponse? {
         didSet {
+            CoreDataStack().clearDataDetails()
             createItem(from: itemResponse)
         }
     }

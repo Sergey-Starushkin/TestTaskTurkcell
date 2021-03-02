@@ -15,7 +15,6 @@ import CoreData
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = RootViewController()
         window?.makeKeyAndVisible()
-        
         return true
     }
     
@@ -33,6 +32,7 @@ import CoreData
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
       let container = NSPersistentContainer(name: "TestTaskTurkcell")
+    
       print("Documents Directory: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last ?? "Not Found!")
       container.loadPersistentStores(completionHandler: { (storeDescription, error) in
         if let error = error as NSError? {

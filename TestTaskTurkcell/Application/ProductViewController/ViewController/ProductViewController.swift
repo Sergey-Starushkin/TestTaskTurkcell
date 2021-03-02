@@ -12,6 +12,7 @@ import CoreData
 final class ProductViewController: UIViewController {
     
     // MARK: - UI
+    let coreDataProvider = CoreDataStack()
     
     private var refreshControl: UIRefreshControl!
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -21,9 +22,7 @@ final class ProductViewController: UIViewController {
             badConnectionView.delegate = self
         }
     }
-    var product: [NSManagedObject] = []
-    
-    
+    var products: [NSManagedObject] = []
     // MARK: - Properties
     private var additionalPadding: CGFloat = 0
     var viewModel = ProductViewModel() {
@@ -34,19 +33,23 @@ final class ProductViewController: UIViewController {
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCollectionView()
+        setupRefreshControl()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
           return
         }
-        super.viewDidLoad()
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Product")
         do {
-          product = try managedContext.fetch(fetchRequest)
+            products = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
+            print("Could not fetch. \(error), \(error.userInfo)")
         }
-        setupCollectionView()
-        setupRefreshControl()
     }
     
 }
@@ -109,17 +112,14 @@ extension ProductViewController: UICollectionViewDelegate {
 extension ProductViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        
-        product.count
+        products.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.reuseIdentifier,
                                                             for: indexPath) as? ProductCollectionViewCell else { return UICollectionViewCell() }
-        print(product.count)
-        let item = product[indexPath.row]
-        
+        let item = products[indexPath.row]
         let name = item.value(forKey: "name") as? String
         let price = item.value(forKey: "price") as? String
         let image = item.value(forKey: "image")
@@ -197,6 +197,7 @@ extension ProductViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         collectionView.collectionViewLayout.invalidateLayout()
+        
     }
     
 }
