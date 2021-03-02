@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yy8-A7-aXv">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+        <array key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Product Item View Controller-->
+        <scene sceneID="lkr-ul-LwY">
+            <objects>
+                <viewController storyboardIdentifier="ProductItemViewController" id="yy8-A7-aXv" customClass="ProductItemViewController" customModule="TestTaskTurkcell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GJ9-VX-5vB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="K2s-mE-y3P">
+                                <rect key="frame" x="20" y="20" width="335" height="627"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="V8D-c6-Pic">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="335"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="V8D-c6-Pic" secondAttribute="height" multiplier="1:1" id="Bdc-CV-tn7"/>
+                                            <constraint firstAttribute="width" secondItem="V8D-c6-Pic" secondAttribute="height" multiplier="1:1" id="jq5-n6-zec"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="jq5-n6-zec"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="Bdc-CV-tn7"/>
+                                                <include reference="jq5-n6-zec"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2R9-lw-LYV">
+                                        <rect key="frame" x="0.0" y="355" width="335" height="272"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xb1-ka-l4K">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="85"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ust-Lk-tZq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="23.5"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=compact">
+                                                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="25"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 $" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTa-JR-T2d">
+                                                        <rect key="frame" x="0.0" y="33.5" width="335" height="23.5"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=compact">
+                                                            <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="25"/>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqS-wy-7Jm">
+                                                        <rect key="frame" x="0.0" y="67" width="335" height="18"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=compact">
+                                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="20"/>
+                                                        </variation>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="xb1-ka-l4K" secondAttribute="bottom" id="3ge-ri-J1j"/>
+                                            <constraint firstItem="xb1-ka-l4K" firstAttribute="top" secondItem="2R9-lw-LYV" secondAttribute="top" id="4dn-HR-FmS"/>
+                                            <constraint firstAttribute="trailing" secondItem="xb1-ka-l4K" secondAttribute="trailing" id="5lm-po-9tv"/>
+                                            <constraint firstItem="xb1-ka-l4K" firstAttribute="width" secondItem="2R9-lw-LYV" secondAttribute="width" id="CWE-87-HXf"/>
+                                            <constraint firstItem="xb1-ka-l4K" firstAttribute="leading" secondItem="2R9-lw-LYV" secondAttribute="leading" id="aJR-QK-24k"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="V8D-c6-Pic" firstAttribute="height" secondItem="K2s-mE-y3P" secondAttribute="height" id="isg-CJ-neA"/>
+                                    <constraint firstItem="V8D-c6-Pic" firstAttribute="width" secondItem="K2s-mE-y3P" secondAttribute="width" id="sRz-6C-fs1"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="isg-CJ-neA"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact" axis="horizontal">
+                                    <mask key="constraints">
+                                        <include reference="isg-CJ-neA"/>
+                                        <exclude reference="sRz-6C-fs1"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xm5-EX-Qy6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xm5-EX-Qy6" firstAttribute="bottom" secondItem="K2s-mE-y3P" secondAttribute="bottom" constant="20" id="P08-MT-QTD"/>
+                            <constraint firstItem="xm5-EX-Qy6" firstAttribute="trailing" secondItem="K2s-mE-y3P" secondAttribute="trailing" constant="20" id="QQ4-k3-3tY"/>
+                            <constraint firstItem="K2s-mE-y3P" firstAttribute="top" secondItem="xm5-EX-Qy6" secondAttribute="top" constant="20" id="XdA-ek-VvT"/>
+                            <constraint firstItem="K2s-mE-y3P" firstAttribute="leading" secondItem="xm5-EX-Qy6" secondAttribute="leading" constant="20" id="aBB-av-oPc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="QqS-wy-7Jm" id="AVW-d2-8gb"/>
+                        <outlet property="imageView" destination="V8D-c6-Pic" id="D5T-QV-9hi"/>
+                        <outlet property="nameLabel" destination="ust-Lk-tZq" id="7cK-nf-c0M"/>
+                        <outlet property="priceLabel" destination="tTa-JR-T2d" id="Maz-RX-jdc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eiz-dq-U7V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-218" y="-598"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="placeholder" width="500" height="375"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

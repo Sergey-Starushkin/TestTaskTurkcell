@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WcF-f5-5Cm">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Product View Controller-->
+        <scene sceneID="2Qg-CX-36K">
+            <objects>
+                <viewController storyboardIdentifier="ProductViewController" id="WcF-f5-5Cm" customClass="ProductViewController" customModule="TestTaskTurkcell" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nOe-Eh-NHW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cXj-03-6SM">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Frc-du-Gb2">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="VgC-yi-Vme">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OCb-FA-kQr">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mhI-6l-llG" customClass="BadConnectionView" customModule="TestTaskTurkcell" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                            </view>
+                            <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZG-k6-5Is" customClass="LoadingView" customModule="TestTaskTurkcell" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="rvG-H7-ihv"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="KZG-k6-5Is" secondAttribute="bottom" id="0IR-Z1-FFK"/>
+                            <constraint firstItem="rvG-H7-ihv" firstAttribute="trailing" secondItem="KZG-k6-5Is" secondAttribute="trailing" id="5mo-g3-c7E"/>
+                            <constraint firstItem="mhI-6l-llG" firstAttribute="top" secondItem="nOe-Eh-NHW" secondAttribute="top" id="8zZ-M8-gpf"/>
+                            <constraint firstItem="KZG-k6-5Is" firstAttribute="top" secondItem="nOe-Eh-NHW" secondAttribute="top" id="Emj-VT-3cv"/>
+                            <constraint firstItem="cXj-03-6SM" firstAttribute="leading" secondItem="rvG-H7-ihv" secondAttribute="leading" id="JMC-6d-p7V"/>
+                            <constraint firstItem="cXj-03-6SM" firstAttribute="top" secondItem="rvG-H7-ihv" secondAttribute="top" id="SEa-yl-WPs"/>
+                            <constraint firstItem="rvG-H7-ihv" firstAttribute="trailing" secondItem="mhI-6l-llG" secondAttribute="trailing" id="hbQ-k4-8iP"/>
+                            <constraint firstItem="rvG-H7-ihv" firstAttribute="trailing" secondItem="cXj-03-6SM" secondAttribute="trailing" id="kO3-hu-eNt"/>
+                            <constraint firstItem="mhI-6l-llG" firstAttribute="leading" secondItem="rvG-H7-ihv" secondAttribute="leading" id="qvu-Wy-0zG"/>
+                            <constraint firstAttribute="bottom" secondItem="mhI-6l-llG" secondAttribute="bottom" id="rfa-hF-x0o"/>
+                            <constraint firstItem="rvG-H7-ihv" firstAttribute="bottom" secondItem="cXj-03-6SM" secondAttribute="bottom" id="u8n-gs-ifo"/>
+                            <constraint firstItem="KZG-k6-5Is" firstAttribute="leading" secondItem="rvG-H7-ihv" secondAttribute="leading" id="y2R-9k-dRW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="badConnectionView" destination="mhI-6l-llG" id="zIi-q5-22E"/>
+                        <outlet property="collectionView" destination="cXj-03-6SM" id="CFA-Q2-AoO"/>
+                        <outlet property="loadingView" destination="KZG-k6-5Is" id="PcS-dA-KgJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbT-io-GGY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="239" y="117"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
