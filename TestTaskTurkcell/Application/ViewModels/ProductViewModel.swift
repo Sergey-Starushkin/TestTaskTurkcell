@@ -10,9 +10,12 @@ import UIKit
 import CoreData
 
 final class ProductViewModel: BaseViewModel {
+    private let coreDataProvider = CoreDataStack()
+
     weak var delegate: CartViewModelDelegate?
-    let coreDataProvider = CoreDataStack()
     var product: [NSManagedObject] = []
+    var products: [NSManagedObject] = []
+
     // MARK: - View State
     private(set) var viewState: ViewState = .unknown {
         didSet {
@@ -20,11 +23,9 @@ final class ProductViewModel: BaseViewModel {
         }
     }
     
-    
     private var cartResponse = Products(products: []) {
         didSet {
             viewState = .loading
-            CoreDataStack().clearData()
             createCartItemsArray(from: cartResponse)
         }
     }
@@ -41,10 +42,11 @@ final class ProductViewModel: BaseViewModel {
     // MARK: - Configure
 
 extension ProductViewModel {
+    
     func downloadCartItems() {
-        
         guard isReachable else { return viewState = .badConnection }
         
+        coreDataProvider.clearData()
         viewState = .loading
         dataProvider.loadCartList { [weak self] response, error in
             guard let itemResponse = response else {
@@ -76,7 +78,6 @@ extension ProductViewModel {
 
 extension ProductViewModel {
     private func createCartItemsArray(from cart: Products) {
-        let coreDataProvider = CoreDataStack()
         cartItems = []
         
         cart.products.forEach {
@@ -93,20 +94,34 @@ extension ProductViewModel {
                     self?.viewState = .error(error)
                 }
                 
-                coreDataProvider.saveProduct(name: responseItem.name, image: image, id: String(responseItem.id), price: String(responseItem.price))
+                self?.coreDataProvider.saveProduct(name: responseItem.name, image: image, id: String(responseItem.id), price: String(responseItem.price))
                 self?.cartItems.append(Item(id: responseItem.id,
-                                               name: responseItem.name,
-                                               price: responseItem.price,
-                                               image: image))
+                                            name: responseItem.name,
+                                            price: responseItem.price,
+                                            image: image))
             }
         }
     }
-    }
+}
 
 
     // MARK: - Reading Data From Core Data
-extension ProductViewModel{
-    func readData(){
+extension ProductViewModel {
+    
+    func fetchData() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Product")
+        do {
+            products = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+
+    func readData() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }

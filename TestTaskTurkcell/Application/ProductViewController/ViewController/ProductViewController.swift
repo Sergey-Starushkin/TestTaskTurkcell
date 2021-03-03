@@ -7,7 +7,6 @@
 
 import UIKit
 import Foundation
-import CoreData
 
 final class ProductViewController: UIViewController {
     
@@ -22,7 +21,6 @@ final class ProductViewController: UIViewController {
             badConnectionView.delegate = self
         }
     }
-    var products: [NSManagedObject] = []
     // MARK: - Properties
     private var additionalPadding: CGFloat = 0
     var viewModel = ProductViewModel() {
@@ -34,29 +32,18 @@ final class ProductViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupInitialState()
         setupCollectionView()
         setupRefreshControl()
     }
-    override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-          return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Product")
-        do {
-            products = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-    }
-    
 }
 
 // MARK: - UpdateUI
 extension ProductViewController: CartViewModelDelegate {
     func updateUI(for state: ProductViewModel.ViewState) {
+        viewModel.fetchData()
+        
         DispatchQueue.main.async {
             switch state {
             case .loaded:
@@ -112,14 +99,14 @@ extension ProductViewController: UICollectionViewDelegate {
 extension ProductViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        products.count
+        viewModel.products.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.reuseIdentifier,
                                                             for: indexPath) as? ProductCollectionViewCell else { return UICollectionViewCell() }
-        let item = products[indexPath.row]
+        let item = viewModel.products[indexPath.row]
         let name = item.value(forKey: "name") as? String
         let price = item.value(forKey: "price") as? String
         let image = item.value(forKey: "image")
@@ -163,10 +150,13 @@ extension ProductViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
-    // MARK: - Configure
+// MARK: - Configure
 
 extension ProductViewController {
+    
+    private func setupInitialState() {
+        loadingView.show()
+    }
     
     private func setupCollectionView() {
         
